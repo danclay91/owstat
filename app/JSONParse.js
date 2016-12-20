@@ -47,9 +47,9 @@ export default class JSONParse extends Component {
                 </View>
             )
         }
-        
+
         return (
-            <View>
+            <View style={styles.mainContainer}>
                 <View style={styles.iconContainer}>
                     {this.renderPlayerIcon()}
                     {this.renderPlayerLevel()}
@@ -145,41 +145,6 @@ export default class JSONParse extends Component {
         return playerGeneralData;
     }
 
-
-
-    /*var generalPlayerInfo = '{----example of playerInfoJSON
-      "data": {
-                    "username": "danclay91",
-        "level": 285,
-        "games": {
-                    "quick": {
-                    "wins": "512"
-          },
-          "competitive": {
-                    "wins": "69",
-            "lost": 83,
-            "played": "152"
-          }
-        },
-        "playtime": {
-                    "quick": "132 hours",
-          "competitive": "32 hours"
-        },
-        "avatar": "https://blzgdapipro-a.akamaihd.net/game/unlocks/0x0250000000000D76.png",
-        "competitive": {
-                    "rank": "2896",
-          "rank_img": "https://blzgdapipro-a.akamaihd.net/game/rank-icons/season-2/rank-5.png"
-        },
-        "levelFrame": "https://blzgdapipro-a.akamaihd.net/game/playerlevelrewards/0x025000000000092A_Border.png",
-        "star": "https://blzgdapipro-a.akamaihd.net/game/playerlevelrewards/0x025000000000092A_Rank.png"
-      }
-    }'
-    */
-
-
-
-
-
     _createStatObject(_statName, _statValue) {
         return {
             statName: _statName,
@@ -188,6 +153,9 @@ export default class JSONParse extends Component {
     }
 }
 var styles = StyleSheet.create({
+    mainContainer: {
+        marginTop: 50,
+    },
     iconContainer: {
         marginTop: 10,
         flexDirection: 'row',

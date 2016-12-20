@@ -5,8 +5,8 @@
  */
 
 import React, { Component } from 'react';
-import InputPair from './InputPair'; 
-import JSONParse from './app/JSONParse'; 
+import InputPair from './InputPair';
+import JSONParse from './app/JSONParse';
 import {
   AppRegistry,
   StyleSheet,
@@ -15,9 +15,10 @@ import {
   TextInput,
   Button
 } from 'react-native';
+import { Router, Scene } from 'react-native-router-flux';
 
 // Just for development, delete when done. 
-var generalPlayerMockInfo= {
+var generalPlayerMockInfo = {
   "data": {
     "username": "danclay91",
     "level": 285,
@@ -53,38 +54,62 @@ export default class owstat extends Component {
     super();
     this.state = {
       gametag: 'danclay91',
-      playerInfo: null, 
+      playerInfo: null,
     };
   }
 
-  componentDoesMount(){
+  componentDoesMount() {
     fetchData(testRequestURL)
-      .then((response)=> response.json())
+      .then((response) => response.json())
       .then((responseData) => {
         this.setState({
           playerInfo: responseData,
         });
       })
-      .done(); 
+      .done();
   }
 
-/*  render() {
-    return (
-      <View>
-        <InputPair />
-        <JSONParse message={this.state.playerInfo}/>
-      </View>
-    );
-  }
-*/
-  render() {
-    return (
-      <View>
-        <InputPair />
-        <JSONParse message={generalPlayerMockInfo}/>
-      </View>
-    );
-  }
+render() { 
+  return(
+    <Router> 
+      <Scene key="root">
+        <Scene 
+          key = "s1"
+          component = {InputPair}
+          title = "textinput"
+          initial
+          />
+
+        <Scene 
+          key = "data"
+          component = {JSONParse}
+          title = 'user data'
+          />
+      </Scene>
+    </Router>
+  )
+}
+
+  //------------- TODO: Replace current render with this one. 
+  /*  render() {
+      return (
+        <View>
+          <InputPair />
+          <JSONParse message={this.state.playerInfo}/>
+        </View>
+      );
+    }
+  */
+
+  /* -----------------Works but no Router 
+    render() {
+      return (
+        <View>
+          <InputPair />
+          <JSONParse message={generalPlayerMockInfo}/>
+        </View>
+      );
+    }*/
 }
 
 const styles = StyleSheet.create({
