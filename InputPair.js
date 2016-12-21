@@ -5,7 +5,8 @@ import {
     Text,
     View,
     TextInput,
-    Button
+    Button,
+    Alert,
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
@@ -49,34 +50,20 @@ export default class InputPair extends Component {
     }
 
     openPlayerStats() {
-        /*
-                fetch('https://api.lootbox.eu/psn/us/'+this.state.gametag+'/profile')
-                    .then((response) => {
-                        alert(response.json().value); 
-                        response.json();
-                    })
-                    .then((responseData) => {
-                        this.setState({
-                            infoJSON: responseData,
-                        });
-                        alert(responseData);
-                    })
-                    .done();
-        */
 
-        fetch('https://api.lootbox.eu/psn/us/'+this.state.gametag+'/profile')
+        fetch('https://api.lootbox.eu/psn/us/' + this.state.gametag + '/profile')
             .then((response) => response.json())
             .then((responseData) => {
                 this.setState({
-                    infoJSON:responseData, 
+                    infoJSON: responseData,
                 });
-                Actions.data({message: this.state.infoJSON});
+                if (this.state.infoJSON.statusCode == 404) {
+                    Alert.alert('Unable to find player');
+                    return;
+                }
+                Actions.data({ message: this.state.infoJSON });
             })
             .done();
-
-        /* if (this.state.infoJSON != null) {
-             Actions.data({ message: playerInfo });
-         }*/
     }
 
     render() {
@@ -87,13 +74,10 @@ export default class InputPair extends Component {
                     style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
                     onChangeText={(text) => this.setState({ gametag: text })}
                     />
-                <TextInput
-                    style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-                    value={this.state.gametag}
+                <Button
+                    onPress={this.openPlayerStats.bind(this)}
+                    title="Search"
                     />
-
-                <Text onPress={this.openPlayerStats.bind(this)}> Click to See player Data.
-                </Text>
             </View>
         );
     }
