@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
     AppRegistry,
     StyleSheet,
@@ -14,7 +14,7 @@ import {
 export default class JSONParse extends Component {
     constructor(props) {
         super(props);
-
+        alert(props.message);
         this.state = {
             message: props.message,
             dataSource: new ListView.DataSource({
@@ -27,6 +27,8 @@ export default class JSONParse extends Component {
         if (this.state.message != null) {
             this.updateStatData();
         }
+        alert(this.props.message);
+        alert("no message");
         return; 
     }
 
