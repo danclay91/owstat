@@ -14,6 +14,7 @@ import {
 export default class JSONParse extends Component {
     constructor(props) {
         super(props);
+
         alert(props.message);
         this.state = {
             message: props.message,

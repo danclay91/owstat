@@ -23,9 +23,9 @@ export default class SideMenu extends Component{
 
     render(){
         return(
-            <View>
-                <View>
-                    <Button title="base" onPress={this.openTitleScreen}>Home</Button>
+            <View style={{flex:1,backgroundColor: 'black',}}>
+                <View >
+                    <Button style ={{backgroundColor:'black'}} title="base" onPress={this.openTitleScreen}>Home</Button>
                     <Button title="playerStats" onPress={this.openPlayerStats}>Player Stats</Button>
                 </View>
             </View>

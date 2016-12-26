@@ -20,26 +20,39 @@ import { Router, Scene } from 'react-native-router-flux'
 export default class owstat extends Component {
     constructor() {
         super()
-        this.state = {
-        }
+        
     }
-    /* ---- for testing player stats screen 
-        render() {
-            return (
-                <View>
-                    <PlayerStats />
-                </View>
-            )
-        }
-        */
+/*
+    render() {
+    return (
+      <Router>
+        <Scene key="root">
+          <Scene
+            key="s1"
+            component={PlayerStats}
+            title="textinput"
+            initial
+            />
+
+          <Scene
+            key="data"
+            component={JSONParse}
+            title='user data'
+            />
+        </Scene>
+      </Router>
+    )
+  }*/
+
+    
     render() {
         return (
             <Router>
                 <Scene key="drawer" component={MyDrawer}>
-                    <Scene key="main" tabs={true} >
-                        <Scene key="base" component={PlayerStats} initial />
+                    <Scene key="main" tabs={true}>
+                        <Scene key="base"navigationBarStyle={{backgroundColor:'black'}} component={TitleScreen} initial />
                         <Scene key="playerStats" component={PlayerStats} />
-                        <Scene key="playerData" component={JSONParse} />
+                        <Scene key="data" title="playerdata" component={JSONParse} />
                     </Scene>
                 </Scene>
             </Router>
