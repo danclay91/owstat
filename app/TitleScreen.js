@@ -35,7 +35,8 @@ export default class TitleScreen extends Component {
         resizeMode="stretch"
         style={styles.titleOverwatchLogo}>
         <View>
-          <Text style={{ marginTop: 80 }}>TITLE APP GO HERE</Text>
+          <Text style={{ marginTop: 80}}>default font: TITLE APP GO HERE</Text>
+          <Text style={{ marginTop: 80, fontFamily:'koverwatch'}}>modified font: TITLE APP GO HERE</Text>
         </View>
       </Image>
 

@@ -29,7 +29,7 @@ export default class owstat extends Component {
         <Scene key="root">
           <Scene
             key="s1"
-            component={PlayerStats}
+            component={PlayerStats()}
             title="textinput"
             initial
             />

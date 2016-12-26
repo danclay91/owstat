@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
     AppRegistry,
     StyleSheet,
@@ -7,8 +7,11 @@ import {
     TextInput,
     Button,
     ListView,
-    Image
+    Image,
+    Dimensions,
+    TouchableOpacity
 } from 'react-native';
+import Background from './Background';
 
 
 export default class JSONParse extends Component {
@@ -30,7 +33,7 @@ export default class JSONParse extends Component {
         }
         alert(this.props.message);
         alert("no message");
-        return; 
+        return;
     }
 
     renderStat(stat) {
@@ -42,15 +45,7 @@ export default class JSONParse extends Component {
         )
     }
 
-    render() {
-        if(this.state.message==null){
-            return(
-                <View>
-                    <Text>No Data </Text>
-                </View>
-            )
-        }
-
+    renderGeneralStatInfo() {
         return (
             <View style={styles.mainContainer}>
                 <View style={styles.iconContainer}>
@@ -67,12 +62,124 @@ export default class JSONParse extends Component {
         )
     }
 
+    render() {
+
+        /*
+        <ListView
+                        dataSource={this.state.dataSource}
+                        renderRow={this.renderStat}
+*/
+        /*
+                return (
+                    <Image source={require('./images/omnicsbg.png')}
+                        resizeMode="stretch"
+                        style={{ flex: 1 }}>
+                        <View style={{ backgroundColor: 'rgba(0,0,0,0.4)', flex:1}}>
+                            <Text>Hi</Text>
+                            <Text>There</Text>
+                        
+        
+        
+                        </View>
+                    </Image>
+                )
+            }*/
+        var width = Dimensions.get('window').width
+        return (
+
+            <Image source={require('./images/omnicsbg_small.png')}
+                resizeMode="stretch"
+                style={{ width: null, height: null, flex: 1 }}>
+
+                <View style={{marginTop:1, borderWidth:2,backgroundColor: 'rgba(0,0,0,0.4)', flexDirection: 'row' }}>
+                    <View style={{ marginTop: 80, marginLeft: 40, marginBottom: 10, alignSelf: 'center' }}>
+                        <Image
+                            source={{ uri: this._parseGeneralPlayerIcon() }}
+                            style={styles.playericon}
+                            />
+                        <View>
+                            <Text style={{ fontSize: 30, fontFamily: 'koverwatch' }}>{this._parseGeneralUsername()}</Text>
+                        </View>
+                    </View>
+                    <View style={{ marginTop: 75, marginLeft: 90 }}>
+                        <View style={{ flexDirection: 'row' }}>
+                            {this.renderPlayerLevel()}
+                            <Text style={{ fontFamily: 'koverwatch', fontSize: 20, alignSelf: 'center' }}>Level {this._parseGeneralLevel()}</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row' }}>
+                            {this.renderPlayerRank()}
+                            <Text style={{ fontFamily: 'koverwatch', fontSize: 20, alignSelf: 'center' }}>Rank {this._parseGeneralRank()}</Text>
+                        </View>
+                    </View>
+                </View>
+                <View style={{ flexDirection: 'row', alignSelf: 'center', backgroundColor: 'black' }}>
+                    <TouchableOpacity style={{flex:1}}>
+                        <View style={{ backgroundColor: '#2a6186', justifyContent:'center', alignItems:'center',height:30,borderColor:'#00c3ff',borderWidth:2 }}>
+                            <Text style={{fontFamily:"koverwatch", color:"white"}}>Quickplay</Text>
+                        </View>
+
+                    </TouchableOpacity>
+                    <TouchableOpacity style={{flex:1}}>
+                        <View style={{ backgroundColor:'#2a6186', justifyContent:'center', alignItems:'center',height:30,borderColor:'#00c3ff',borderWidth:2 }}>
+                            <Text style={{fontFamily:"koverwatch", color:"white"}}>Competitive</Text>
+                        </View>
+
+                    </TouchableOpacity>
+                </View>
+
+
+
+            </Image>
+
+        );
+    }
+
+    /* ---prebuilt buttons. 
+        <View style={{flexDirection:'row',alignSelf:'center',backgroundColor:'black'}}>
+                        <Button style={{flex:1,width:600}} title="Quickplay"/>
+                        <View/>
+                        <Button style={{flex:1}} title="Competitive"/> 
+                    </View>
+    
+     */
+
+
+
+    renderPlayerHeader() {
+        <View style={{ backgroundColor: 'rgba(0,0,0,0.4)', flexDirection: 'row' }}>
+            <View style={{ marginTop: 80, marginLeft: 40, marginBottom: 10, alignSelf: 'center' }}>
+                <Image
+                    source={{ uri: this._parseGeneralPlayerIcon() }}
+                    style={styles.playericon}
+                    />
+                <View>
+                    <Text style={{ fontSize: 30, fontFamily: 'koverwatch' }}>{this._parseGeneralUsername()}</Text>
+                </View>
+            </View>
+            <View style={{ marginTop: 75, marginLeft: 90 }}>
+                <View style={{ flexDirection: 'row' }}>
+                    {this.renderPlayerLevel()}
+                    <Text style={{ fontFamily: 'koverwatch', fontSize: 20, alignSelf: 'center' }}>Level {this._parseGeneralLevel()}</Text>
+                </View>
+                <View style={{ flexDirection: 'row' }}>
+                    {this.renderPlayerRank()}
+                    <Text style={{ fontFamily: 'koverwatch', fontSize: 20, alignSelf: 'center' }}>Rank {this._parseGeneralRank()}</Text>
+                </View>
+            </View>
+        </View>
+
+    }
     renderPlayerIcon() {
         return (
-            <Image
-                source={{ uri: this._parseGeneralPlayerIcon() }}
-                style={styles.playericon}
-                />
+            <View style={{ marginLeft: 30, marginTop: 80, marginBottom: 10, alignSelf: 'center' }}>
+                <Image
+                    source={{ uri: this._parseGeneralPlayerIcon() }}
+                    style={styles.playericon}
+                    />
+                <View>
+                    <Text style={{ fontSize: 30, fontFamily: 'koverwatch' }}>{this._parseGeneralUsername()}</Text>
+                </View>
+            </View>
         )
     }
 
@@ -98,9 +205,12 @@ export default class JSONParse extends Component {
                     source={{ uri: this._parseGeneralRankImage() }}
                     style={styles.rankImage}
                     />
-                <Text style={styles.rank}>{this._parseGeneralRank()}</Text>
             </View>
         )
+    }
+
+    _parseGeneralLevel() {
+        return this.state.message.data.level;
     }
 
     _parseGeneralRankImage() {
@@ -216,9 +326,9 @@ var styles = StyleSheet.create({
         textAlign: 'left',
     },
     playericon: {
-        height: 50,
-        width: 50,
-        alignItems: 'center',
+        height: 80,
+        width: 80,
+        opacity: 1,
     },
 });
 
